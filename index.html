@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Text Editor</title>
+    <style>
+        .main {
+            height: 100vh;
+            width: 100%;
+            background-color: rgb(234, 233, 229);
+            top: 0px;
+            left: 0px;
+            position: fixed;
+            display: flex;
+            justify-content: center;
+            background-image: url(https://images.unsplash.com/photo-1493219686142-5a8641badc78?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D);
+            background-repeat: no-repeat;
+            background-size: 100%;
+            background-position: center center;
+        }
+
+        .text {
+            margin-top: 50px;
+            font-weight: bolder;
+            font-size: 40px;
+            letter-spacing: 1px;
+            text-shadow: 0px 0px 3px orange;
+            text-align: center;
+        }
+
+        button {
+            background-color: black;
+            color: white;
+            padding: 5px 8px;
+            font-size: 13px;
+            font-variant: small-caps;
+            border-radius: 10px;
+            transition-duration: 0.5s;
+            transform: scale(1.1);
+            margin: 5px;
+        }
+
+        button:hover {
+            background-color: white;
+            color: black;
+            cursor: pointer;
+        }
+
+        textarea {
+            border: none;
+            box-shadow: 0px 0px 10px black;
+            outline: none;
+            width: 80%;
+            margin: 10px;
+        }
+
+        #info {
+            background-color: rgb(165, 106, 29);
+            color: white;
+            margin: 10px;
+        }
+
+        @media (max-width: 600px) {
+            button {
+                width: 100%;
+                margin: 5px 0;
+            }
+        }
+    </style>
+</head>
+<body>
+     <div class="main">
+        <div class="text">
+            <p class="text1">TEXT EDITOR</p>
+            <div>
+                <form>
+                    <textarea name="editor" id="txt" cols="90" rows="20" autofocus oninput="updateInfo()"></textarea>
+                    <br>
+                    <button type="button" onclick="upperCase()">UpperCase</button>
+                    <button type="button" onclick="lowerCase()">LowerCase</button>
+                    <button type="button" onclick="bold()">Bold</button>
+                    <button type="button" onclick="normal()">Normal</button>
+                    <button type="button" onclick="smallCaps()">SmallCaps</button>
+                    <button type="button" onclick="search()">Search</button>
+                    <button type="button" onclick="alignLeft()">Left</button>
+                    <br>
+                    <button type="button" onclick="alignRight()">Right</button>
+                    <button type="button" onclick="alignCenter()">Center</button>
+                    <button type="button" onclick="capitalize()">Capitalize</button>
+                    <select name="" id="fonts" onchange="changeFont()">
+                        <option value="" selected>Font Family</option>
+                        <option value="cursive">Cursive</option>
+                        <option value="elephant">Elephant</option>
+                        <option value="Arial">Arial</option>
+                        <option value="Times New Roman">Times New Roman</option>
+                        <option value="Broadway">Broadway</option>
+                        <option value="Rockwell Extra Bold">Rockwell Extra Bold</option>
+                    </select>
+                    <br><br>
+                    <h3 style="color: black; font-size: 20px;"  id="info" >Your text contains 0 words and 0 characters</h3>
+                </form>
+            </div>
+        </div>
+     </div>
+
+     <script>
+        let txt = document.getElementById("txt");
+        let info = document.getElementById("info");
+
+        function upperCase() {
+            txt.value = txt.value.toUpperCase();
+        }
+
+        function lowerCase() {
+            txt.value = txt.value.toLowerCase();
+        }
+
+        function bold() {
+            txt.style.fontWeight = "bold";
+        }
+
+        function normal() {
+            txt.style.fontWeight = "normal";
+        }
+
+        function search() {
+            let str = prompt("Enter the String to search");
+            let text = txt.value;
+            console.log(text);
+            if (text.includes(str)) {
+                alert(`Yes ${str} is present`);
+            } else {
+                alert(`${str} is not present`);
+            }
+        }
+
+        function updateInfo() {
+            let text = txt.value;
+            info.innerHTML = `Your text contains ${text.split(' ').length} words and ${text.length} characters`;
+        }
+
+        function alignLeft() {
+            txt.style.textAlign = "left";
+        }
+
+        function alignRight() {
+            txt.style.textAlign = "right";
+        }
+
+        function alignCenter() {
+            txt.style.textAlign = "center";
+        }
+
+        function capitalize() {
+            txt.style.textTransform = "capitalize";
+        }
+
+        function smallCaps() {
+            txt.style.fontVariant = "small-caps";
+        }
+
+        function changeFont() {
+            let fontSelector = document.getElementById("fonts");
+            txt.style.fontFamily = fontSelector.value;
+        }
+     </script>
+</body>
+</html
